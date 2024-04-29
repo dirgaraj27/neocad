@@ -1,6 +1,6 @@
 <div class="header">
     <div class="header-left">
-        <a href="index.php" class="logo">
+        <a href="" class="logo">
             <img src="{{ asset('images/logo.png')}}" width="35" height="35" alt> <span>Dental Lab</span>
         </a>
     </div>
