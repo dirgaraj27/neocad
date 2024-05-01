@@ -26,7 +26,7 @@
                         <li><a href="doctors.php">Doctor List</a></li>
                         <li><a href="partnerlab.php">Lab Partners List</a></li>
                         <li>
-                            <a href="">Add User</a>
+                            <a href="{{ url('admin/users/create') }}">Add User</a>
                         </li>
 
 
@@ -38,7 +38,7 @@
                     <a href="#"><span class="menu-side"><img src="{{ asset('images/icons/bar-icon.svg')}}" alt></span>
                         <span> Services </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="service-category.php">Service Type</a></li>
+                        <li><a href="{{ url('/service_types') }}">Service Type</a></li>
                         <li><a href="services.php">Services</a></li>
                         <li><a href="add-services.php">Add New Service</a></li>
                     </ul>
