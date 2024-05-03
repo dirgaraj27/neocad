@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables/datatables.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/feather.css')}}">
     <link rel="stylesheet" href="{{ asset('css/style.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/main.css')}}" type="text/css">
 </head>
 
 <body>

@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\ServiceTypeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CaseController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\CalendarController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,16 +35,21 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
    Route::put('/services/{service}', [ServiceController::class, 'update'])->name('services.update');
    Route::delete('/services/{service}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
 
+    //calendar routs
+    Route::get('/calendar', [CalendarController::class, 'index'])->name('admin.calendar.index');
+
      // Cases Routes
      Route::get('/cases', [CaseController::class, 'index'])->name('admin.cases.index');
      Route::get('/cases/create', [CaseController::class, 'create'])->name('admin.cases.create');
      Route::post('/cases', [CaseController::class, 'store'])->name('cases.store');
      Route::get('/cases/{cases}/edit', [CaseController::class, 'edit'])->name('admin.cases.edit');
-     Route::put('/cases/{cases}', [CaseController::class, 'update'])->name('cases.update');
-     Route::delete('/cases/{cases}', [CaseController::class, 'destroy'])->name('admin.cases.destroy');
+     Route::put('/cases/{case}', [CaseController::class, 'update'])->name('cases.update');
+     Route::delete('/cases/{case}', [CaseController::class, 'destroy'])->name('cases.destroy');
      Route::get('/get-services/{serviceType}', [CaseController::class, 'getServices']);
      Route::get('/get-service-price/{serviceId}', [CaseController::class, 'getServicePrice']);
-
+     Route::post('/cases/{case}/files', [CaseController::class, 'storeFiles']);
+     Route::delete('/cases/files/{file}', [CaseController::class, 'deleteFile']);
+     Route::get('/cases/{case}/files', [CaseController::class, 'getFiles']);
 
 
      // user table route

@@ -70,40 +70,37 @@ $(document).ready(function() {
         });
     });
 // multiple file upload and file preview-case form
-    function previewFiles(event) {
+function previewFiles(event) {
     const files = event.target.files; // Get the selected files
-    const fileInfo = document.getElementById('fileInfo');
-    if (files && files.length > 0) {
-        // Clear previous file info
-        fileInfo.innerHTML = '';
-        // Loop through each file
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const fileDiv = document.createElement('div');
-            const fileLink = document.createElement('a');
-            // Display file information and link
-            fileDiv.innerHTML = `File ${i + 1}: ${file.name} (${formatBytes(file.size)})`;
-            fileLink.href = URL.createObjectURL(file);
-            fileLink.target = '_blank';
-            fileLink.textContent = 'View File';
-            // Append file info and link to fileInfo div
-            fileInfo.appendChild(fileDiv);
-            fileInfo.appendChild(fileLink);
-            fileInfo.appendChild(document.createElement('br'));
-        }
-        // Display file info
-        fileInfo.style.display = 'block';
-    } else {
-        // Hide file info if no files are selected
-        fileInfo.style.display = 'none';
+    const fileInfoDiv = document.getElementById('fileInfo');
+    fileInfoDiv.innerHTML = ''; // Clear previous file info
+    // Loop through each selected file
+    for (const file of files) {
+        // Create a div element for each file
+        const fileDiv = document.createElement('div');
+        fileDiv.textContent = `${file.name} (${formatFileSize(file.size)})`; // Display file name and size
+
+        // Append the file div to the file info div
+        fileInfoDiv.appendChild(fileDiv);
     }
+
+    // Display the file info div
+    fileInfoDiv.style.display = 'block';
 }
-// Function to format file size
-function formatBytes(bytes, decimals = 2) {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+
+// Function to format file size in human-readable format
+function formatFileSize(bytes) {
+    const kb = 1024;
+    const mb = kb * 1024;
+    const gb = mb * 1024;
+
+    if (bytes >= gb) {
+        return (bytes / gb).toFixed(2) + ' GB';
+    } else if (bytes >= mb) {
+        return (bytes / mb).toFixed(2) + ' MB';
+    } else if (bytes >= kb) {
+        return (bytes / kb).toFixed(2) + ' KB';
+    } else {
+        return bytes + ' bytes';
+    }
 }

@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class CaseRecord extends Model
 {
     use HasFactory;
+
     protected $table = 'cases';
+
     protected $fillable = [
-        'user_id',
+        'user_id', // Make sure to include this if it's not already included
         'doctor_name',
         'gender',
         'patient_name',
@@ -25,10 +27,11 @@ class CaseRecord extends Model
         'pickup_note',
         'pickup_date',
         'doctor_note',
-        'image',
         'total_cost',
         'status',
+
     ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -42,5 +45,10 @@ class CaseRecord extends Model
     public function serviceType()
     {
         return $this->belongsTo(ServiceType::class);
+    }
+
+    public function caseFiles()
+    {
+        return $this->hasMany(CaseFile::class, 'case_id');
     }
 }

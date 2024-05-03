@@ -9,7 +9,7 @@
 
                 </li>
                 <li>
-                    <a href="calendar.php"><i class="fa fa-calendar"></i> <span>Calendar</span></a>
+                    <a href="{{ url('/calendar') }}"><i class="fa fa-calendar"></i> <span>Calendar</span></a>
                 </li>
                 <li class="submenu">
                     <a href="#"><span class="menu-side"><img src="{{ asset('images/icons/menu-icon-04.svg')}}" alt></span>

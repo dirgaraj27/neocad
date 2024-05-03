@@ -17,8 +17,8 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('cases.store') }}">
-                            @csrf
+                        <form action="{{ route('cases.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                             <div class="row">
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="input-block local-forms">
@@ -80,6 +80,9 @@
                                                 <option value="{{ $serviceType->id }}">{{ $serviceType->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('service_type_id')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -88,6 +91,9 @@
                                         <select name="service_id" id="servicesDropdown" class="form-control select" onchange="updateTotalCost(this.value)">
                                             <option>-- Select Service --</option>
                                         </select>
+                                        @error('service_id')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -95,17 +101,27 @@
                                         <label>Due Date: <span class="login-danger">*</span></label>
                                         <input class="form-control datetimepicker"  name="due_date" type="text">
                                     </div>
+                                    @error('due_date')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-2">
                                     <div class="input-block local-forms">
                                         <label>Tooth#: <span class="login-danger">*</span></label>
                                         <input class="form-control" name="tooth" type="text">
+                                        @error('tooth')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
+
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-3">
                                     <div class="input-block local-forms">
                                         <label>Stump Shade: <span class="login-danger">*</span></label>
                                         <input class="form-control" name="stump_shade" type="text">
+                                        @error('stump_shade')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-3">
@@ -117,6 +133,9 @@
                                             <option value="Option Two">Option Two</option>
                                             <option value="Option Three">Option Three</option>
                                         </select>
+                                        @error('final_shade')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6">
@@ -133,6 +152,9 @@
                                                 <input type="radio" name="case_type" value="Physical" class="form-check-input">Physical
                                             </label>
                                         </div>
+                                        @error('case_type')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6">
@@ -148,18 +170,27 @@
                                                 <input type="radio" id="pickupNo" name="pickup" value="No" class="form-check-input">No
                                             </label>
                                         </div>
+                                        @error('pickup')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6 pickupDetails" style="display: none;">
                                     <div class="input-block local-forms">
                                         <label>Pickup Note: <span class="login-danger">*</span></label>
                                         <input class="form-control" name="pickup_note" type="text">
+                                        @error('pickup_note')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6 pickupDetails" style="display: none;">
                                     <div class="input-block local-forms">
                                         <label>Pickup Date: <span class="login-danger">*</span></label>
                                         <input class="form-control datetimepicker" name="pickup_date" type="text">
+                                        @error('pickup_date')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-12">
@@ -167,7 +198,11 @@
                                         <label>Doctor's Note
                                             <span class="login-danger">*</span></label>
                                         <textarea class="form-control" name="doctor_note" rows="3" cols="30"></textarea>
+                                        @error('doctor_note')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
+
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="input-block local-top-form">
@@ -177,6 +212,9 @@
                                                 class="hide-input">
                                             <label for="file" class="upload">Choose Files</label>
                                         </div>
+                                        @error('images')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6">

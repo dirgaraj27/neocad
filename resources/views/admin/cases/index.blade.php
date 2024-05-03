@@ -105,16 +105,32 @@
                                                     data-bs-toggle="dropdown" aria-expanded="false"><i
                                                         class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="edit-appointment.html"><i
+                                                    <a class="dropdown-item" href="{{ route('admin.cases.edit', $case->id) }}"><i
                                                             class="fa-solid fa-pen-to-square m-r-5"></i>
                                                         Edit</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#delete_patient"><i
-                                                            class="fa fa-trash-alt m-r-5"></i> Delete</a>
+                                                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#case_user_{{ $case->id }}"><i class="fa fa-trash-alt m-r-5"></i>Delete</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
+                                    <div id="case_user_{{ $case->id }}" class="modal fade delete-modal" role="dialog">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body text-center">
+                                                    <img src="{{ asset('images/sent.png')}}" alt width="50" height="46">
+                                                    <h3>Are you sure want to delete this user?</h3>
+                                                    <div class="m-t-20">
+                                                        <form action="{{ route('cases.destroy', $case->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                            <button type="button" class="btn btn-white" data-bs-dismiss="modal">Cancel</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
 
 
