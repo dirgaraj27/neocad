@@ -4,7 +4,7 @@
             <ul>
                 <li class="menu-title">&nbsp;</li>
                 <li class="submenu">
-                    <a href="#"><span class="menu-side"><img src="{{ asset('images/icons/menu-icon-01.svg')}}" alt></span>
+                    <a href="{{ url('/admin/dashboard') }}"><span class="menu-side"><img src="{{ asset('images/icons/menu-icon-01.svg')}}" alt></span>
                         <span> Dashboard </span></a>
 
                 </li>
@@ -15,19 +15,16 @@
                     <a href="#"><span class="menu-side"><img src="{{ asset('images/icons/menu-icon-04.svg')}}" alt></span>
                         <span> Case </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="case-list.php">Case List</a></li>
-                        <li><a href="add-case.php">Add Case</a></li>
+                        <li><a href="{{ url('/cases') }}">Case List</a></li>
+                        <li><a href="{{ url('cases/create') }}">Add Case</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
                     <a href="#"><span class="menu-side"><img src="{{ asset('images/icons/menu-icon-02.svg')}}" alt></span>
                         <span> Users </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="doctors.php">Doctor List</a></li>
-                        <li><a href="partnerlab.php">Lab Partners List</a></li>
-                        <li>
-                            <a href="{{ url('admin/users/create') }}">Add User</a>
-                        </li>
+                        <li><a href="{{ url('admin/users') }}">All User List</a></li>
+                        <li><a href="{{ url('admin/users/create') }}">Add User</a></li>
 
 
 
@@ -39,8 +36,8 @@
                         <span> Services </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
                         <li><a href="{{ url('/service_types') }}">Service Type</a></li>
-                        <li><a href="services.php">Services</a></li>
-                        <li><a href="add-services.php">Add New Service</a></li>
+                        <li><a href="{{ url('/services') }}">Services</a></li>
+                        <li><a href="{{ url('/services/create') }}">Add New Service</a></li>
                     </ul>
                 </li>
                 <li class="submenu">

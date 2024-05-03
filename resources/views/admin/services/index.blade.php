@@ -7,12 +7,17 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="appointments.html">Service Types </a></li>
+                        <li class="breadcrumb-item">Services</li>
                         <li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Category List</li>
+                        <li class="breadcrumb-item active">Service List</li>
                     </ul>
                 </div>
             </div>
+            @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
         </div>
         <div class="row">
             <div class="col-sm-12">
@@ -22,7 +27,7 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <div class="doctor-table-blk">
-                                        <h3>Service Types</h3>
+                                        <h3>Services</h3>
                                         <div class="doctor-search-blk">
                                             <div class="top-nav-search table-search-blk">
                                                 <form>
@@ -31,7 +36,7 @@
                                                 </form>
                                             </div>
                                             <div class="add-group">
-                                                <a href="{{ url('/service_types/create') }}" class="btn btn-primary add-pluss ms-2"><img src="{{ asset('images/icons/plus.svg')}}" alt></a>
+                                                <a href="{{ url('/services/create') }}" class="btn btn-primary add-pluss ms-2"><img src="{{ asset('images/icons/plus.svg')}}" alt></a>
                                                 <a href="javascript:;" class="btn btn-primary doctor-refresh ms-2"><img src="{{ asset('images/icons/re-fresh.svg')}}" alt></a>
                                             </div>
                                         </div>
@@ -41,11 +46,7 @@
                                     <a href="javascript:;" class=" me-2"><img src="assets/img/icons/pdf-icon-01.svg" alt></a>
                                 </div>
                             </div>
-                            @if(session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
+
                         </div>
 
                         <div class="table-responsive">
@@ -59,13 +60,15 @@
                                             </div>
                                         </th>
                                         <th width="30px">S.No.</th>
-                                        <th>Service Types</th>
+                                        <th>Services</th>
+                                        <th>Type</th>
+                                        <th>Price</th>
                                         <th width="100px">Status</th>
                                         <th width="50px"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($serviceTypes as $index => $serviceType)
+                                @foreach ( $services as $index => $service )
                                     <tr>
                                         <td>
                                             <div class="form-check check-tables">
@@ -73,27 +76,29 @@
                                             </div>
                                         </td>
                                         <td>{{ $index + 1 }}</td>
-                                        <td>{{ $serviceType->name }}</td>
-                                        <td>{{ $serviceType->status ? 'Active' : 'In-Active' }}</td>
+                                        <td>{{ $service->name }}</td>
+                                        <td> {{ $service->serviceType->name }}</td>
+                                        <td>{{ $service->price }}</td>
+                                        <td> {{ $service->status ? 'Active' : 'In-Active' }}</td>
                                         <td class="text-end">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="{{ route('service_types.edit', $serviceType->id) }}"><i class="fa-solid fa-pen-to-square m-r-5"></i>Edit</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delete_service_type_{{ $serviceType->id }}"><i class="fa fa-trash-alt m-r-5"></i>Delete</a>
+                                                    <a class="dropdown-item" href="{{ route('admin.services.edit', $service->id) }}"><i class="fa-solid fa-pen-to-square m-r-5"></i>Edit</a>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#delete_service_{{ $service->id }}"><i class="fa fa-trash-alt m-r-5"></i>Delete</a>
 
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                    <div id="delete_service_type_{{ $serviceType->id }}" class="modal fade delete-modal" role="dialog">
+                                    <div id="delete_service_{{ $service->id }}" class="modal fade delete-modal" role="dialog">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-body text-center">
                                                     <img src="{{ asset('images/sent.png')}}" alt width="50" height="46">
-                                                    <h3>Are you sure want to delete this service type?</h3>
+                                                    <h3>Are you sure want to delete this user?</h3>
                                                     <div class="m-t-20">
-                                                        <form action="{{ route('service_types.destroy', $serviceType->id) }}" method="POST">
+                                                        <form action="{{ route('admin.services.destroy', $service->id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-danger">Delete</button>
@@ -105,6 +110,7 @@
                                         </div>
                                     </div>
                                     @endforeach
+
                                 </tbody>
                             </table>
                         </div>

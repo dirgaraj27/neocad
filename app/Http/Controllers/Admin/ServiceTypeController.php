@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\ServiceType;
@@ -23,7 +24,7 @@ class ServiceTypeController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'status' => 'required|in:active,inactive',
+            'status' => 'required|in:1,0',
         ]);
 
         $serviceType = new ServiceType();

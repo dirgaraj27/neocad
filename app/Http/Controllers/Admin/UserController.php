@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -9,9 +10,17 @@ use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
-        $users = User::all();
+        $query = User::where('role', '!=', 0);
+
+        if ($request->filled('role')) {
+            $query->where('role', $request->role);
+        }
+
+        $users = $query->get();
+
         return view('admin.users.index', compact('users'));
     }
 
@@ -58,7 +67,7 @@ class UserController extends Controller
 
         // Handle image upload if provided
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images/users', 'public');
+            $imagePath = $request->file('image')->store('user_images', 'public');
             $user->image = $imagePath;
         }
 
@@ -76,17 +85,47 @@ class UserController extends Controller
         return view('admin.users.edit', compact('user'));
     }
 
+
     public function update(Request $request, User $user)
     {
-        // Validation
-        // Update user
-        // Redirect
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20',
+            'password' => 'nullable|string|min:8|confirmed',
+            'role' => 'required|in:0,1,2',
+            'address' => 'nullable|string|max:255', // Removed 'required'
+            'state' => 'nullable|string|max:255', // Removed 'required'
+            'city' => 'nullable|string|max:255', // Removed 'required'
+            'zipcode' => 'nullable|string|max:20', // Removed 'required'
+            'country' => 'nullable|string|max:255', // Removed 'required'
+            'status' => 'required|boolean',
+            'image' => 'nullable|image|max:2048', // Removed 'required'
+        ]);
+
+        if ($request->hasFile('image')) {
+            // Handle image upload
+            $imagePath = $request->file('image')->store('user_images', 'public');
+            $validatedData['image'] = $imagePath;
+        }
+
+
+        if ($request->filled('password')) {
+            $validatedData['password'] = bcrypt($request->password);
+        } else {
+            // Remove password field from validation data if not provided
+            unset($validatedData['password']);
+        }
+
+        $user->update($validatedData);
+
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
     }
 
     public function destroy(User $user)
     {
-        // Delete user
-        // Redirect
+        $user->delete();
+        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
     }
 
     public function updateStatus(Request $request, User $user)

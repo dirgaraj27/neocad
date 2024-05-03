@@ -30,7 +30,10 @@ class User extends Authenticatable
         'status',
     ];
 
-
+    public function scopeByRole($query, $roles)
+    {
+        return $query->whereIn('role', $roles);
+    }
 
     /**
      * The attributes that should be hidden for arrays.

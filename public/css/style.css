@@ -449,8 +449,14 @@ table.table td h2 span {
 
 .text-danger,
 .dropdown-menu>li>a.text-danger {
-    color: #f62d51
+    color: #f62d51;
 }
+.text-danger {
+    margin-top: 10px;
+    font-size: 14px;
+    font-style: italic;
+}
+
 
 .text-info,
 .dropdown-menu>li>a.text-info {
@@ -1174,7 +1180,7 @@ textarea.form-control {
     display: none;
     font-size: 24px;
     height: 70px;
-    line-height: 70px;
+
     padding: 0 20px;
     position: absolute;
     right: 0;
@@ -6032,7 +6038,8 @@ a.fc-event:not([href]) {
 }
 
 .alert {
-    font-size: 14px
+    font-size: 14px;
+    margin-top: 15px;
 }
 
 .notifications {
@@ -7258,6 +7265,21 @@ a.btn.add-links:hover {
     padding-left: 15px;
     font-size: 14px
 }
+.profile-image {
+    display: flex;
+}
+.profile-image .img {
+ width: 50px;
+ height: 50px;
+ border-radius: 50%;
+ overflow: hidden;
+ margin: -10px 0;
+ margin-right: 15px;
+}
+.profile-image .img img {
+    max-width: 100%;
+    height: auto;
+}
 
 .profile-image a {
     color: #333448
@@ -7266,6 +7288,8 @@ a.btn.add-links:hover {
 .profile-image a:hover {
     color: #2e37a4
 }
+
+
 
 .profile-upload {
     display: flex
@@ -7304,7 +7328,7 @@ a.btn.add-links:hover {
     font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
-    width: 90px;
+
     color: #333
 }
 
