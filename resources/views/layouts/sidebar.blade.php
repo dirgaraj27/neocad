@@ -44,8 +44,8 @@
                     <a href="#"><span class="menu-side"><img src="{{ asset('images/icons/document-icon.svg')}}" alt></span>
                         <span> PriceBook </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="pricebook.php">PriceBook List</a></li>
-                        <li><a href="add-pricebook.php">Add New PriceBook</a></li>
+                        <li><a href="{{ url('/pricebook') }}">PriceBook List</a></li>
+                        <li><a href="{{ url('/pricebook/create') }}">Add New PriceBook</a></li>
                     </ul>
                 </li>
 

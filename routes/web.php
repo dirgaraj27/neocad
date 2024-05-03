@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\CaseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\CalendarController;
+use App\Http\Controllers\Admin\PriceBookController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -50,6 +51,14 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
      Route::post('/cases/{case}/files', [CaseController::class, 'storeFiles']);
      Route::delete('/cases/files/{file}', [CaseController::class, 'deleteFile']);
      Route::get('/cases/{case}/files', [CaseController::class, 'getFiles']);
+
+    // PriceBook Routes
+    Route::get('/pricebook', [PriceBookController::class, 'index'])->name('admin.pricebook.index');
+    Route::get('/pricebook/create', [PriceBookController::class, 'create'])->name('admin.pricebook.create');
+    Route::post('/pricebook', [PriceBookController::class, 'store'])->name('pricebook.store');
+    Route::get('/pricebook/{pricebook}/edit', [PriceBookController::class, 'edit'])->name('admin.pricebook.edit');
+    Route::put('/pricebook/{pricebook}', [PriceBookController::class, 'update'])->name('pricebook.update');
+    Route::delete('/pricebook/{pricebook}', [PriceBookController::class, 'destroy'])->name('admin.pricebook.destroy');
 
 
      // user table route

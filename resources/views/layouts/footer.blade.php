@@ -18,7 +18,27 @@
 <script src="{{ asset('js/fullcalendar.min.js')}}" type="a3b96eccf10c7aa8aa2d933f-text/javascript"></script>
 <script src="{{ asset('js/jquery.fullcalendar.js')}}" type="a3b96eccf10c7aa8aa2d933f-text/javascript"></script>
 <script src="{{ asset('js/rocket-loader.min.js')}}" data-cf-settings="de667d3c5b38e24430cc5358-|49" defer></script>
+<script src="{{ asset('js/custom.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        // Double click event handler to enable editing
+        $('tbody').on('dblclick', 'input[type="text"].price-field', function() {
+            $(this).prop('readonly', false);
+            $(this).closest('tr').find('button.update-price').prop('disabled', false);
+        });
 
+        // Update button click event handler
+        $('tbody').on('click', 'button.btn-primary', function() {
+            // Get the new price value
+            var newPrice = $(this).closest('tr').find('input[type="text"].price-field').val();
 
+            // Perform update operation here, for now, let's just log the new price
+            console.log('New Price:', newPrice);
 
+            // Disable editing after update
+            $(this).closest('tr').find('input[type="text"].price-field').prop('readonly', true);
+            $(this).prop('disabled', true);
+        });
+    });
+</script>
 
